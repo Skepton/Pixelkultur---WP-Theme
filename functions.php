@@ -4,13 +4,7 @@ function themepixel_time_ago() {
 	global $post;
  
 	$date = get_post_time('G', true, $post);
- 
-	/**
-	 * Where you see 'themepixel' below, you'd
-	 * want to replace those with whatever term
-	 * you're using in your theme to provide
-	 * support for localization.
-	 */ 
+
  
 	// Array of time period chunks
 	$chunks = array(
@@ -39,12 +33,6 @@ function themepixel_time_ago() {
 	if ( 0 > $since )
 		return __( 'någon gång', 'themepixel' );
  
-	/**
-	 * We only want to output one chunks of time here, eg:
-	 * x years
-	 * xx months
-	 * so there's only one bit of calculation below:
-	 */
  
 	//Step one: the first chunk
 	for ( $i = 0, $j = count($chunks); $i < $j; $i++) {
@@ -134,18 +122,17 @@ function getLowestCategory(){
 	$postCategories = get_the_category();
 	for ($I = 0;$I<sizeof($postCategories);$I++)
 	{
-		//this is a top level category
+		
 		if ($postCategories[$I])
 		{
 			continue;
 		}
 		for ($J=0;J<sizeof($postCategories);$J++)
 		{
-			//if another category lists it as its parent, it cannot be the lowest category 
+
 			if (strcmp($postCategories[$I]->name,$postCategories[$J]->category_parent)==0)
 			break;
 		}
-		//at this point, no other cateogry says it's its parent, therefore it must be the lowest one
 		die($postCategories[$I]->slug) ;
 	}
 }
